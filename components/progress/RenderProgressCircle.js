@@ -60,15 +60,15 @@ import Link from "next/link";
 const RenderProgress = ({ number, name, link = "#" }) => (
  
     <>
-      {/* <Progress
+      <Progress
         type="circle"
        
         percent={100}
         format={() => <CountUp end={number} duration={2} />}
-      /> */}
-      <div>
+      />
+      {/* <div>
       <CountUp end={number} duration={2} />
-      </div>
+      </div> */}
       <p style={{ marginTop: 18, color: "#666" }}>{name.toUpperCase()}</p>
     </>
  

@@ -1,6 +1,6 @@
 import { Row, Col, Divider } from "antd";
 import AdminLayout from "../../components/layout/AdminLayout";
-import RenderProgress from "../../components/progress/RenderProgress";
+import RenderProgress from "../../components/progress/RenderProgressCircle";
 import useNumbers from "../../hooks/useNumbers";
 
 function Admin() {
