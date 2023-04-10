@@ -1,0 +1,153 @@
+.active {
+  color: #1890ff !important;
+  text-decoration: underline;
+}
+
+
+.plan-card {
+  padding: 16px;
+}
+
+.plan-card-content {
+  border: 1px solid #e8e8e8;
+  border-radius: 6px;
+  /* background-color: #fff; */
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.plan-card-content:hover {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.plan-card-content .ant-card-head-title {
+  font-size: 20px;
+  color: #1890ff;
+  font-weight: bold;
+}
+
+.price {
+  list-style-type: none;
+  padding: 0;
+  margin: 16px 0;
+  font-size: 16px;
+}
+
+.price li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e8e8e8;
+  color: #888;
+}
+
+.price li:last-child {
+  border-bottom: none;
+}
+
+.price li.grey {
+  color: #bbb;
+}
+
+.price li strong {
+  font-weight: bold;
+  color: #222;
+}
+
+.price li .ant-btn {
+  margin-top: 16px;
+}
+
+
+.columns {
+  float: left;
+  width: 33.3%;
+  padding: 8px;
+}
+
+
+
+
+.price2 {
+  list-style-type: none;
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.price2:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+}
+
+.price2 .header {
+ background-color: lightslategray;
+  color: white;
+  font-size: 25px;
+}
+
+.price2 li {
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  text-align: center;
+}
+
+.price2 .grey {
+  background-color: lightblue;
+  font-size: 20px;
+}
+.black{
+  background-color: #04AA6D;
+}
+
+.button {
+  background-color: #04AA6D;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+  .columns {
+    width: 100%;
+  }
+}
+
+
+
+.inc-exp-container {
+
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.inc-exp-container > div {
+  flex: 1;
+  text-align: center;
+}
+
+/* .inc-exp-container > div:first-of-type {
+  border-right: 1px solid #dedede;
+} */
+
+.money.plus {
+  color: #2ecc71;
+}
+
+.money.minus {
+  color: #c0392b;
+}
+
+.center {
+  text-align: center;
+}
+
+.flex{
+  display: flex;
+  justify-content: center;
+}
