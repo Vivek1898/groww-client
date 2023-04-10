@@ -66,7 +66,7 @@ const RenderProgress = ({ number, name, link = "#" }) => (
         percent={100}
         format={() => <CountUp end={number} duration={2} />}
       /> */}
-      <div>
+      <div style={{color:"green"}} className='style'>
       <CountUp end={number} duration={2} />
       </div>
       <p style={{ marginTop: 18, color: "#666" }}>{name.toUpperCase()}</p>

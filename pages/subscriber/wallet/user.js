@@ -11,6 +11,7 @@ const User = () => {
     const userId = auth?.user?._id;
     return (
         <SubscriberLayout>
+            
         <WalletDetails userId={userId} />
             <Profile />
        <div style={{ display: 'flex', justifyContent: 'center' }}>

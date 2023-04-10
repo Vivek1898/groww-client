@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import AdminLayout from '../components/layout/AdminLayout';
 import RenderProgress from './progress/RenderProgress';
+import { Spin } from 'antd';
 const WalletDetails = ( {userId,walletBalance,setwalletBalance}) => {
   const [wallet, setWallet] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,13 +40,13 @@ const WalletDetails = ( {userId,walletBalance,setwalletBalance}) => {
 //     fetchWallet();
 //   }, [userId]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (!wallet ) {
-    return <p>Loading....</p>;
-  }
+if (loading || !wallet) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <Spin />
+    </div>
+  );
+}
 
   return (
     <div>
@@ -69,12 +70,13 @@ const WalletDetails = ( {userId,walletBalance,setwalletBalance}) => {
             link="/admin/posts"
           />
       </div>
-      <div>
+      <div >
         {/* <h4>Latest Balance</h4>
         <p className="money minus">₹{wallet.latestBal}</p> */}
          <RenderProgress
+         
             number={wallet.latestBal}
-            name="Latest Balance"
+            name="Wallet"
             link="/admin/posts"
           />
       </div>

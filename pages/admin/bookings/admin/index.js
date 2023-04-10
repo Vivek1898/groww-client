@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Table, Button, Modal, Form, Input,Tag } from "antd";
+import { Table, Button, Modal, Form, Input,Tag, Spin } from "antd";
 import axios from "axios";
 import { AuthContext } from "../../../../context/auth";
 import AdminLayout from "../../../../components/layout/AdminLayout";
@@ -10,6 +10,7 @@ const Admin = () => {
   const [auth, setAuth] = useContext(AuthContext);
   const [showCancelForm, setShowCancelForm] = useState(false);
   const [BookingIdToCancel, setBookingIdToCancel] = useState(null);
+  const[loading,setLoading]=useState(false)
   const userId = auth?.user?._id;
   const columns = [
     {
@@ -209,12 +210,15 @@ const Admin = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
+        setLoading(true)
         const { data } = await axios.get(
           `/bookings/admin/all`
         );
-        console.log(data.payments);
+        //console.log(data.payments);
         setBookings(data.payments);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         console.error(error);
       }
     };
@@ -245,13 +249,15 @@ const Admin = () => {
           </Form.Item>
         </Form>
       </Modal>
-
-      <Table
+      <Spin spinning={loading}>
+<Table
         dataSource={bookings}
         columns={columns}
         rowKey="_id"
         pagination={{ pageSize: 10 }}
       />
+</Spin>
+    
     </AdminLayout>
   );
 };

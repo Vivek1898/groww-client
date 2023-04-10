@@ -9,7 +9,7 @@ const Profile = () => {
   const [auth, setAuth] = useContext(AuthContext);
 
   return (
-    <>
+    <AdminLayout>
       <h1 style={{ textAlign: 'center' }}>Profile</h1>
 
       <Row justify="center">
@@ -20,7 +20,7 @@ const Profile = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </AdminLayout>
   );
 };
 

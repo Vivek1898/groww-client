@@ -12,6 +12,20 @@ import {
   BgColorsOutlined,
   UserOutlined,
   CommentOutlined,
+  MoneyCollectFilled,
+  StarOutlined,
+  WalletOutlined,
+  MoneyCollectOutlined,
+  ProfileOutlined,
+  ProfileTwoTone,
+  FileAddOutlined,
+  UserAddOutlined,
+  EnterOutlined,
+  TransactionOutlined,
+  UpSquareOutlined,
+  BookOutlined,
+  MoneyCollectTwoTone,
+  TranslationOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -50,7 +64,7 @@ const AdminNav = () => {
         mode="inline"
         inlineCollapsed={collapsed}
       >
-        <Menu.Item key="1" icon={<SettingOutlined />}>
+        <Menu.Item key="1" icon={<StarOutlined />}>
           <Link href="/admin">
             <a className={activeName("/admin")}>Stats</a>
           </Link>
@@ -91,21 +105,21 @@ const AdminNav = () => {
 
 
         {/* comments */}
-        <Menu.Item key="2" icon={<CommentOutlined />}>
+        <Menu.Item key="2" icon={<WalletOutlined />}>
           <Link href="/admin/wallet">
-            <a className={activeName("/admin/wallet")}>Wallet</a>
+            <a className={activeName("/admin/wallet")}>Admin Wallet</a>
           </Link>
         </Menu.Item>
 
         {/* Recharge */}
-<Menu.Item key="3" icon={<CommentOutlined />}>
+<Menu.Item key="3" icon={<MoneyCollectOutlined />}>
           <Link href="/admin/recharge">
-            <a className={activeName("/admin/recharge")}>Recharge</a>
+            <a className={activeName("/admin/recharge")}>Admin Recharge</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="4" icon={<SettingOutlined />}>
+        <Menu.Item key="4" icon={<ProfileTwoTone />}>
           <Link href="/admin/profile">
-            <a className={activeName("/admin/profile")}>Profile</a>
+            <a className={activeName("/admin/profile")}>Admin Profile</a>
           </Link>
         </Menu.Item>
         
@@ -125,49 +139,51 @@ const AdminNav = () => {
         </SubMenu> */}
 
         {/* profile */}
-        <Menu.Item key="5" icon={<UserOutlined />}>
-          <Link href="/admin/bookings">
-            <a className={activeName("/admin/bookings")}>Recharge History</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="6" icon={<UserOutlined />}>
+
+        <Menu.Item key="6" icon={<UserAddOutlined />}>
           <Link href="/admin/plans">
-            <a className={activeName("/admin/plans")}>Create Plans</a>
+            <a className={activeName("/admin/plans")}>Admin Create Plans</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="7" icon={<UserOutlined />}>
+        <Menu.Item key="7" icon={<EnterOutlined />}>
           <Link href="/admin/plans/allplans">
-            <a className={activeName("/admin/plans/allplans")}>All Plans</a>
+            <a className={activeName("/admin/plans/allplans")}>Admin All Plans</a>
           </Link>
         </Menu.Item>
-          <Menu.Item key="8" icon={<UserOutlined />}>
+          <Menu.Item key="8" icon={<TransactionOutlined />}>
           <Link href="/admin/refund">
-            <a className={activeName("/admin/refund")}>Refund Details</a>
+            <a className={activeName("/admin/refund")}>Admin Withdrawl Details</a>
           </Link>
         </Menu.Item>
-          <Menu.Item key="9" icon={<UserOutlined />}>
-          <Link href="/admin/refund/apply">
-            <a className={activeName("/admin/refund/apply")}>Apply Refund</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="10" icon={<UserOutlined />}>
+       
+        <Menu.Item key="10" icon={<UpSquareOutlined />}>
           <Link href="/admin/update">
-            <a className={activeName("/admin/update")}>Wallet Update</a>
+            <a className={activeName("/admin/update")}>Admin Profit Update</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="11" icon={<UserOutlined />}>
+        <Menu.Item key="11" icon={<BookOutlined />}>
           <Link href="/admin/bookings/admin">
             <a className={activeName("/admin/bookings/admin")}>Admin Bookings</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="12" icon={<CommentOutlined />}>
+        <Menu.Item key="12" icon={<WalletOutlined />}>
           <Link href="/admin/wallet/user">
             <a className={activeName("/admin/wallet/user")}>User Wallet</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="13" icon={<CommentOutlined />}>
+        <Menu.Item key="13" icon={<EnterOutlined />}>
           <Link href="/admin/plans/user">
             <a className={activeName("/admin/plans/user")}>User Plans</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="9" icon={<MoneyCollectTwoTone />}>
+          <Link href="/admin/refund/apply">
+            <a className={activeName("/admin/refund/apply")}>User  Apply Withdrawl</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="5" icon={<TranslationOutlined />}>
+          <Link href="/admin/bookings">
+            <a className={activeName("/admin/bookings")}> User Recharge History</a>
           </Link>
         </Menu.Item>
 

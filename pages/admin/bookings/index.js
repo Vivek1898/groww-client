@@ -102,7 +102,7 @@ const Bookings = () => {
   }, [userId,showCancelForm]);
 
   return (
-    <SubscriberLayout>
+    <AdminLayout>
       <Modal
         visible={showCancelForm}
         onCancel={handleCancel}
@@ -131,7 +131,7 @@ const Bookings = () => {
         rowKey="_id"
         pagination={{ pageSize: 10 }}
       />
-    </SubscriberLayout>
+    </AdminLayout>
   );
 };
 

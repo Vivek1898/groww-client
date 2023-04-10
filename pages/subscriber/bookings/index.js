@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Table, Button, Modal, Form, Input,Tag } from "antd";
+import { Table, Button, Modal, Form, Input,Tag,Spin } from "antd";
 import axios from "axios";
 import { AuthContext } from "../../../context/auth";
 import AdminLayout from "../../../components/layout/AdminLayout";
@@ -11,6 +11,7 @@ const Bookings = () => {
   const [showCancelForm, setShowCancelForm] = useState(false);
   const [BookingIdToCancel, setBookingIdToCancel] = useState(null);
   const userId = auth?.user?._id;
+  const[loading,setLoading]=useState(false)
   const columns = [
     {
       title: "Booking ID",
@@ -88,13 +89,16 @@ const Bookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
+        setLoading(true)
         const { data } = await axios.get(
           `/bookings/${userId}`
         );
-        console.log(data.payments);
+        //console.log(data.payments);
         setBookings(data.payments);
+        setLoading(false)
       } catch (error) {
         console.error(error);
+        setLoading(false)
       }
     };
 
@@ -103,6 +107,8 @@ const Bookings = () => {
 
   return (
     <SubscriberLayout>
+      <h1>User Bookings</h1>
+      <br></br>
       <Modal
         visible={showCancelForm}
         onCancel={handleCancel}
@@ -124,13 +130,14 @@ const Bookings = () => {
           </Form.Item>
         </Form>
       </Modal>
-
+<Spin spinning={loading} tip="Loading...">
       <Table
         dataSource={bookings}
         columns={columns}
         rowKey="_id"
         pagination={{ pageSize: 10 }}
       />
+      </Spin>
     </SubscriberLayout>
   );
 };

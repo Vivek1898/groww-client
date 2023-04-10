@@ -7,6 +7,13 @@ import {
   SettingOutlined,
   UserOutlined,
   CommentOutlined,
+  WalletFilled,
+  EnterOutlined,
+  TransactionOutlined,
+  ProfileOutlined,
+  MoneyCollectFilled,
+  MoneyCollectOutlined,
+  WalletOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -88,13 +95,13 @@ const SubscriberNav = () => {
 
         {/* Recharge */}
 
-        <Menu.Item key="4" icon={<SettingOutlined />}>
+        <Menu.Item key="4" icon={<ProfileOutlined />}>
           <Link href="/subscriber/profile/user">
             <a className={activeName("/subscriber/profile/user")}>Profile</a>
           </Link>
         </Menu.Item>
         
-        <Menu.Item key="5" icon={<UserOutlined />}>
+        <Menu.Item key="5" icon={<TransactionOutlined />}>
           <Link href="/subscriber/bookings">
             <a className={activeName("/subscriber/bookings")}>Recharge History</a>
           </Link>
@@ -118,19 +125,19 @@ const SubscriberNav = () => {
         
        
        
-          <Menu.Item key="9" icon={<UserOutlined />}>
+          <Menu.Item key="9" icon={<MoneyCollectOutlined />}>
           <Link href="/subscriber/refund/apply">
-            <a className={activeName("/subscriber/refund/apply")}>Apply Refund</a>
+            <a className={activeName("/subscriber/refund/apply")}>Apply Withdrawl</a>
           </Link>
         </Menu.Item>
      
        
-        <Menu.Item key="12" icon={<CommentOutlined />}>
+        <Menu.Item key="12" icon={<WalletOutlined />}>
           <Link href="/subscriber/wallet/user">
             <a className={activeName("/subscriber/wallet/user")}>User Wallet</a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="13" icon={<CommentOutlined />}>
+        <Menu.Item key="13" icon={<EnterOutlined />}>
           <Link href="/subscriber/plans/user">
             <a className={activeName("/subscriber/plans/user")}>User Plans</a>
           </Link>

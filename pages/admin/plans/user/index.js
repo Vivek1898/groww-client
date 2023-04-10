@@ -181,7 +181,7 @@ const UpdateWallet = () => {
       render: (planExpiryDate) => {
         const expiryDate = new Date(planExpiryDate);
         const currentDate = new Date();
-        if (currentDate < expiryDate) {
+        if (currentDate > expiryDate) {
           return <Tag color="orange">Expired</Tag>;
         } else {
           // Use a date formatting library to format the date
@@ -282,7 +282,7 @@ const UpdateWallet = () => {
   }, [userId]);
 
   return (
-    <SubscriberLayout>
+    <AdminLayout>
    <br></br>
    <h1 style={{ textAlign: 'center' }}>User Plans</h1>
 
@@ -293,7 +293,7 @@ const UpdateWallet = () => {
         pagination={{ pageSize: 10 }}
       />
        <br></br>
-    </SubscriberLayout>
+    </AdminLayout>
   );
 };
 

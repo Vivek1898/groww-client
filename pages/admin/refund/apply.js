@@ -37,7 +37,7 @@ const Apply = () => {
 
   }
   return (
-    <SubscriberLayout>
+    <AdminLayout>
       <br></br>
 
 <h1 style={{ textAlign: 'center' }}>Withdraw</h1>
@@ -116,7 +116,7 @@ const Apply = () => {
         </Form.Item>
       </Form>
       <br></br>
-    </SubscriberLayout>
+    </AdminLayout>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Table, Button, Modal, Form, Input,Tag } from "antd";
+import { Table, Button, Modal, Form, Input,Tag, Spin } from "antd";
 import axios from "axios";
 import { AuthContext } from  "../../../../context/auth";
 import AdminLayout from "../../../../components/layout/AdminLayout";
@@ -8,7 +8,7 @@ import SubscriberLayout from "../../../../components/layout/SubsLayout";
 const UpdateWallet = () => {
   const [bookings, setBookings] = useState([]);
   const [auth, setAuth] = useContext(AuthContext);
-
+  const[loading,setLoading]=useState(false)
   const userId = auth?.user?._id;
 
   
@@ -269,12 +269,15 @@ const UpdateWallet = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.get(
           `/bookings/user/wallet/plans/${userId}`
         );
         console.log(data.payments);
         setBookings(data.payments);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error(error);
       }
     };
@@ -287,12 +290,14 @@ const UpdateWallet = () => {
    <br></br>
    <h1 style={{ textAlign: 'center' }}>User Plans</h1>
 
+<Spin spinning={loading} tip="Loading...">
       <Table
         dataSource={bookings}
         columns={columns}
         rowKey="_id"
         pagination={{ pageSize: 10 }}
       />
+      </Spin>
        <br></br>
     </SubscriberLayout>
   );

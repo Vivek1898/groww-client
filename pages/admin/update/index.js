@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Table, Button, Modal, Form, Input,Tag } from "antd";
+import { Table, Button, Modal, Form, Input,Tag, Spin } from "antd";
 import axios from "axios";
 import { AuthContext } from "../../../context/auth";
 import AdminLayout from "../../../components/layout/AdminLayout";
-import { SearchOutlined } from "@ant-design/icons";
+import { LoadingOutlined, SearchOutlined, UpCircleOutlined } from "@ant-design/icons";
+import toast from "react-hot-toast";
 const UpdateWallet = () => {
   const [bookings, setBookings] = useState([]);
   const [auth, setAuth] = useContext(AuthContext);
@@ -11,8 +12,8 @@ const UpdateWallet = () => {
   const [userIdToUpdate, setuserIdToUpdate] = useState(null);
   const[profitToUpdate,setprofitToUpdate]=useState(0)
   const userId = auth?.user?._id;
-
   
+  const [loading, setLoading] = useState(false);
 
   const uniqueEmails = new Set(bookings.map((b) => b.user.email));
   console.log(uniqueEmails)
@@ -28,6 +29,7 @@ const UpdateWallet = () => {
     value: planName,
   }));
   const columns = [
+ 
     {
       title: "Booking ID",
       dataIndex: "razorpay_payment_id",
@@ -285,33 +287,42 @@ const UpdateWallet = () => {
   const handleCancel = () => {
     setShowCancelForm(false);
   };
-
+const [isLoading, setIsLoading] = useState(false);
   const handleSubmitCancelBooking = async (values) => {
-    alert(userIdToUpdate)
+    // alert(userIdToUpdate)
   
     try {
+      setIsLoading(true);
+      
       await axios.post(`/refund/${userIdToUpdate}/update`, {
         // email: values.email,
         // reason: values.reason,
         amount:profitToUpdate,
         
       });
-      alert("Booking cancelled successfully!");
+      toast.success("Wallet Updated successfully!");
+      // alert("Booking cancelled successfully!");
+      setIsLoading(false);
       setShowCancelForm(false);
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
     }
   };
+  
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.get(
           `/bookings/update/wallet/${userId}`
         );
         console.log(data.payments);
         setBookings(data.payments);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error(error);
       }
     };
@@ -335,13 +346,15 @@ const UpdateWallet = () => {
             <Input />
           </Form.Item> */}
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" icon={isLoading ? <LoadingOutlined/>:<UpCircleOutlined/>}>
               Update  Wallet
             </Button>
-            <Button onClick={handleCancel}>Cancel</Button>
+            <Button onClick={handleCancel}    >Cancel</Button>
           </Form.Item>
         </Form>
       </Modal>
+<Spin spinning={loading}>
+
 
       <Table
         dataSource={bookings}
@@ -349,6 +362,7 @@ const UpdateWallet = () => {
         rowKey="_id"
         pagination={{ pageSize: 10 }}
       />
+      </Spin>
     </AdminLayout>
   );
 };

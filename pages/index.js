@@ -1,7 +1,7 @@
 import { useContext, useEffect,useState } from "react";
 import { AuthContext } from "../context/auth";
 import AdminLayout from "../components/layout/AdminLayout";
-import { Layout } from "antd";
+import { Layout, Progress } from "antd";
 import axios from "axios";
 const { Content, Sider } = Layout;
 import { Row, Col } from "antd";
@@ -10,6 +10,7 @@ import Script from 'next/script'
 import WalletDetails from "../components/wallet";
 import {useRouter} from "next/router";
 import toast from "react-hot-toast";
+import { Alert, Space, Spin } from 'antd';
 function Home() {
   // context
   const Router = useRouter();
@@ -18,21 +19,21 @@ function Home() {
   const [wallet,setwalletBalance] = useState(0);
   const userId = auth?.user?._id;
   console.log(wallet)
-
+const [loading, setLoading] = useState(false);
   
   const roleBasedLink = () => {
     if (auth?.user?.role === "Admin") {
-      return "/admin";
+      return "/admin/bookings";
     } else if (auth?.user?.role === "Author") {
       return "/author";
     } else {
-      return "/subscriber";
+      return "/subscriber/bookings";
     }
   };
   const checkoutHandler = async (amount ,name,planCompleteTime, profitPerDay,totalProfit,id,walletBalance ) => {
     // alert(id);
  // alert(amount);
-  
+ setLoading(true);
     const planDelatils ={
       name,
       planCompleteTime,
@@ -71,6 +72,7 @@ function Home() {
       order_id: order.id,
       handler: async (response) => {
         try {
+          setLoading(true);
           const verifyUrl = "/paymentverification";
           const { data } = await axios.post(verifyUrl, {
             response,
@@ -79,7 +81,7 @@ function Home() {
             planDelatils
           });
           toast.success("Payment Successful");
-
+          setLoading(false);
          
           Router.push(`${roleBasedLink()}`);
           console.log(data);
@@ -110,7 +112,7 @@ function Home() {
     };
     const razor = new window.Razorpay(options);
     razor.open();
-
+setLoading(false);
 
   //}
   // else{
@@ -130,46 +132,86 @@ function Home() {
 
 
     const fetchPlans = async () => {
+      setLoading(true);
       const { data } = await axios.get("/plans/get");
       console.log(data);
       setPlans(data.plan);
+      setLoading(false);
     };
 
     fetchPlans();
   }, []);
 
 
- 
+  // const [loadingProgress, setLoadingProgress] = useState(0);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setLoadingProgress(prevProgress => prevProgress + 20);
+  //   }, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
+  const [showLogo, setShowLogo] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowLogo(false);
+    }, 2000);
+  
+    const interval = setInterval(() => {
+      setLoadingProgress((prevProgress) => prevProgress + 50);
+    }, 1000);
+  
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }, []);
+  
 
   return (
     
-<div>
-<Script src="https://checkout.razorpay.com/v1/checkout.js" />
-{auth.user && <WalletDetails userId={userId} walletBalance={wallet} setwalletBalance={setwalletBalance} />}
-{/* <WalletDetails
-userId={userId}
-/> */}
-<h1 className="center" >Buy Plans</h1>
-<Row gutter={[16, 16]} justify="center">
+    <div>
+    <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
-  {plans.map((plan) => (
-  
-      <Card
-      id={plan._id}
-      name={plan.name}
-      planCompleteTime={plan.planTime}
-        amount={plan.planAmount}
-        profitPerDay={plan.planProfit}
-        totalProfit={plan.planTotalIncome}
-        walletBalance={wallet}
-        img={plan.img}
-        checkoutHandler={checkoutHandler}
-      />
-      
-   
-  ))}
-</Row>
-</div>
+    {showLogo ? (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ textAlign: 'center' }}>
+          <h1>Groww Cash</h1>
+          {/* <div style={{ marginBottom: 20 }}>Loading...</div> */}
+          <Progress percent={loadingProgress} status="active" />
+        </div>
+      </div>
+    ) : (
+      <div>
+        {auth.user && <WalletDetails userId={userId} walletBalance={wallet} setwalletBalance={setwalletBalance} />}
+        <h1 className="center">Buy Plans</h1>
+        <Spin spinning={loading} tip="Hold On :)">
+        <Row gutter={[16, 16]} justify="center">
+          {plans.map((plan) => (
+            <Card
+              id={plan._id}
+              name={plan.name}
+              planCompleteTime={plan.planTime}
+              amount={plan.planAmount}
+              profitPerDay={plan.planProfit}
+              totalProfit={plan.planTotalIncome}
+              walletBalance={wallet}
+              img={plan.img}
+              checkoutHandler={checkoutHandler}
+              auth={auth}
+            />
+          ))}
+        </Row>
+        </Spin>
+      </div>
+    )}
+  </div>
+
+
+
 
 
     // <div>
