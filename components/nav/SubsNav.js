@@ -130,6 +130,12 @@ const SubscriberNav = () => {
             <a className={activeName("/subscriber/refund/apply")}>Apply Withdrawl</a>
           </Link>
         </Menu.Item>
+        
+        <Menu.Item key="19" icon={<TransactionOutlined />}>
+          <Link href="/subscriber/refund/history">
+            <a className={activeName("/subscriber/refund/history")}>Withdrawl History</a>
+          </Link>
+        </Menu.Item>
      
        
         <Menu.Item key="12" icon={<WalletOutlined />}>

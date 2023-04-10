@@ -186,7 +186,11 @@ const AdminNav = () => {
             <a className={activeName("/admin/bookings")}> User Recharge History</a>
           </Link>
         </Menu.Item>
-
+        <Menu.Item key="19" icon={<TransactionOutlined />}>
+          <Link href="/admin/refund/history">
+            <a className={activeName("/admin/refund/history")}>User Withdrawl History</a>
+          </Link>
+        </Menu.Item>
 
         {/* Customize */}
         {/* <Menu.Item key="14" icon={<BgColorsOutlined />}>

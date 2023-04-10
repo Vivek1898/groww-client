@@ -5,6 +5,7 @@ import axios from "axios";
 import { AuthContext } from "../../../context/auth";
 import AdminLayout from "../../../components/layout/AdminLayout";
 import toast from "react-hot-toast";
+import SubscriberLayout from "../../../components/layout/SubsLayout";
 
 const Refund = () => {
   const [refund, setRefund] = useState([]);
@@ -13,11 +14,7 @@ const Refund = () => {
   const [BookingIdToCancel, setBookingIdToCancel] = useState(null);
   const userId = auth?.user?._id;
   const [form] = Form.useForm();
-  const statusOptions = [
-    { label: "Pending", value: "pending" },
-    { label: "Approved", value: "approved" },
-    { label: "Rejected", value: "Rejected" },
-  ];
+
   const columns = [
 
     
@@ -71,29 +68,30 @@ const Refund = () => {
       render: (date) => new Date(date).toLocaleDateString(),
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status, record) => (
-        <Select
-        value={status}
-        options={statusOptions}
-        onChange={(value) => handleStatusChange(record._id, value)}
-      />
-      ),
-    },
-   
-
-    {
-        title: "Actions",
-        dataIndex: "user",
-        key: "actions",
-        render: (user, record) => (
-          <Button onClick={() => handleCancelBooking(record.email)} disabled={record.status === "cancelled"}>
-           Refund
-          </Button>
-        ),
+        title: "Status",
+        dataIndex: "status",
+        key: "status",
+        render: (status, record) => {
+          let tagColor;
+          switch (status.toLowerCase()) {
+            case "pending":
+              tagColor = "orange";
+              break;
+            case "approved":
+              tagColor = "green";
+              break;
+            case "rejected":
+              tagColor = "red";
+              break;
+            default:
+              tagColor = "gray";
+              break;
+          }
+          return <Tag color={tagColor}>{status}</Tag>;
+        },
       },
+
+   
     
   ];
 
@@ -144,7 +142,7 @@ const Refund = () => {
     const fetchRefund = async () => {
       try {
         const { data } = await axios.get(
-          `/refund/get`
+          `/refund/get/user/${userId}`
         );
        
         setRefund(data.refund);
