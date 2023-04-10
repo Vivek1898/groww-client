@@ -28,11 +28,11 @@ const Bookings = () => {
       key: "date",
       render: (date) => new Date(date).toLocaleDateString(),
     },
-    {
-      title: "Time",
-      dataIndex: "time",
-      key: "time",
-    },
+    // {
+    //   title: "Time",
+    //   dataIndex: "time",
+    //   key: "time",
+    // },
 
     // {
     //     title: "Actions",

@@ -179,7 +179,7 @@ const UpdateWallet = () => {
       render: (planExpiryDate) => {
         const expiryDate = new Date(planExpiryDate);
         const currentDate = new Date();
-        if (currentDate < expiryDate) {
+        if (currentDate > expiryDate) {
           return <Tag color="orange">Expired</Tag>;
         } else {
           // Use a date formatting library to format the date
@@ -187,13 +187,13 @@ const UpdateWallet = () => {
         }
       }
     },
-    {
-      title:"Last Updated",
-      dataIndex:"updatedAt",
-      key:"updatedAt",
-      render:(updatedAt)=>new Date(updatedAt).toLocaleDateString()
+    // {
+    //   title:"Last Updated",
+    //   dataIndex:"updatedAt",
+    //   key:"updatedAt",
+    //   render:(updatedAt)=>new Date(updatedAt).toLocaleDateString()
     
-    },
+    // },
 //     {
 //         title: "Days Left",
 //         dataIndex: "planExpiryDate",

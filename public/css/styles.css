@@ -151,3 +151,8 @@
   display: flex;
   justify-content: center;
 }
+
+
+.ant-table {
+  overflow: auto !important;
+}

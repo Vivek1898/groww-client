@@ -52,7 +52,7 @@ const SignIn = () => {
       <Col span={12} offset={6} style={{ paddingTop: "10%" }}>
         <Title>Sign In</Title>
 
-        <div
+        {/* <div
           style={{
             border: "2px dashed",
             marginBottom: "24px",
@@ -78,7 +78,7 @@ const SignIn = () => {
             <Paragraph copyable>subscriber@gmail.com</Paragraph>
             <Paragraph copyable>ssssss</Paragraph>
           </div>
-        </div>
+        </div> */}
 
         <Form
           initialValues={{
