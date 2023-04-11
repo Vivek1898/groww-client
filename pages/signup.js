@@ -49,6 +49,10 @@ const SignUp = () => {
 
   return (
     <Row>
+      <div style={{ margin: 'auto' }}>
+          <h1>Groww Cash</h1>
+         
+          </div>
       <Col span={12} offset={6} style={{ paddingTop: "10%" }}>
         <Title>Sign Up</Title>
 

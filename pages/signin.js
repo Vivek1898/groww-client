@@ -27,6 +27,7 @@ const SignIn = () => {
         toast.error(data.error);
         setLoading(false);
       } else {
+        
         // save user and token response in context, localstorage then redirect user to dashboard
         setAuth({ user: data.user, token: data.token });
         localStorage.setItem("auth", JSON.stringify(data));
@@ -49,6 +50,10 @@ const SignIn = () => {
 
   return (
     <Row>
+       <div style={{ margin: 'auto' }}>
+          <h1>Groww Cash</h1>
+         
+          </div>
       <Col span={12} offset={6} style={{ paddingTop: "10%" }}>
         <Title>Sign In</Title>
 
@@ -81,10 +86,10 @@ const SignIn = () => {
         </div> */}
 
         <Form
-          initialValues={{
-            email: "admin@gmail.com",
-            password: "aaaaaa",
-          }}
+          // initialValues={{
+          //   email: "admin@gmail.com",
+          //   password: "aaaaaa",
+          // }}
           onFinish={onFinish}
         >
           <Form.Item

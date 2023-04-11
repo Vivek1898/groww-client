@@ -11,6 +11,7 @@ const UpdateWallet = () => {
   const [showCancelForm, setShowCancelForm] = useState(false);
   const [userIdToUpdate, setuserIdToUpdate] = useState(null);
   const[profitToUpdate,setprofitToUpdate]=useState(0)
+  const[paymentIdToUpdate,setpaymentIdToUpdate]=useState(0)
   const userId = auth?.user?._id;
   
   const [loading, setLoading] = useState(false);
@@ -253,11 +254,17 @@ const UpdateWallet = () => {
       render: (_id, record) => (
        
         <Button onClick={() =>{
-            handleCancelBooking(_id,record.planprofitPerDay)
+            handleCancelBooking(_id,record.planprofitPerDay,record._id)
         }} disabled={record.status === "cancelled"}>
           Update
         </Button>
       ),
+    },
+    {
+      title: "Last Updated",
+      dataIndex: "lastUpdated",
+      key: "lastUpdated",
+    
     },
     {
       title: "status",
@@ -275,10 +282,11 @@ const UpdateWallet = () => {
     },
   ];
 
-  const handleCancelBooking = (id,planam) => {
+  const handleCancelBooking = (id,planam ,paymentId) => {
     // alert(id)
     // alert(planam)
     // return;
+    setpaymentIdToUpdate(paymentId);
     setprofitToUpdate(planam)
     setuserIdToUpdate(id);
     setShowCancelForm(true);
@@ -298,6 +306,7 @@ const [isLoading, setIsLoading] = useState(false);
         // email: values.email,
         // reason: values.reason,
         amount:profitToUpdate,
+        paymentId:paymentIdToUpdate
         
       });
       toast.success("Wallet Updated successfully!");
@@ -328,7 +337,7 @@ const [isLoading, setIsLoading] = useState(false);
     };
 
     fetchBookings();
-  }, [userId,showCancelForm]);
+  }, [userId,showCancelForm,isLoading]);
 
   return (
     <AdminLayout>

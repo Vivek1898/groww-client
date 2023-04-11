@@ -82,14 +82,19 @@ const Refund = () => {
       />
       ),
     },
-   
+    {
+      title: "Last Updated",
+      dataIndex: "lastUpdated",
+      key: "lastUpdated",
+    
+    },
 
     {
         title: "Actions",
         dataIndex: "user",
         key: "actions",
         render: (user, record) => (
-          <Button onClick={() => handleCancelBooking(record.email)} disabled={record.status === "cancelled"}>
+          <Button onClick={() => handleCancelBooking(record._id)} disabled={record.status === "approved"}>
            Refund
           </Button>
         ),
