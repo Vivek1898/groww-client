@@ -28,17 +28,6 @@ const WalletDetails = ( {userId,walletBalance,setwalletBalance}) => {
     fetchWalletDetails();
   }, [userId]);
 
-//   useEffect(() => {
-//     const fetchWallet = async () => {
-//       try {
-//         const walletData = await axios.get(`/current/wallets/${userId}`);
-//         setCurrenttWallet(walletData.data);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//     fetchWallet();
-//   }, [userId]);
 
 if (loading || !wallet) {
   return (

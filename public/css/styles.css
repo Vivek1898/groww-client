@@ -162,3 +162,12 @@
     font-size: x-large;
     font-family: cursive;
 }
+.Withdrawl{
+  text-align: center;
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
