@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Table, Button, Modal, Form, Input,Tag } from "antd";
+import { Table, Button, Modal, Form, Input, Tag, Select, Option } from "antd";
 import axios from 'axios';
 import { AuthContext } from '../../../context/auth';
 import AdminLayout from '../../../components/layout/AdminLayout';
+import toast from "react-hot-toast";
 const WalletDetails = () => {
   const [wallet, setWallet] = useState([]);
   const [loading, setLoading] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
   const [CurrentWallet, setCurrenttWallet] = useState(null);
   const userId = auth?.user?._id;
-
+  const [showCancelForm, setShowCancelForm] = useState(false);
+  const [BookingIdToUpdate, setBookingIdToUpdate] = useState(null);
+  const [form] = Form.useForm();
   useEffect(() => {
     const fetchWalletDetails = async () => {
       setLoading(true);
@@ -24,7 +27,7 @@ const WalletDetails = () => {
       }
     };
     fetchWalletDetails();
-  }, [userId]);
+  }, [userId,showCancelForm]);
 
   const columns = [
     {
@@ -58,35 +61,80 @@ const WalletDetails = () => {
       key:"updatedAt",
       render:(updatedAt)=>new Date(updatedAt).toLocaleDateString()
     
-    }
+    },
+    {
+      title: "Actions",
+      dataIndex: "user",
+      key: "actions",
+      render: (user, record) => (
+        <Button onClick={() => handleUpdateWallet(record._id)} disabled={record.status === "approved"}>
+         Update
+        </Button>
+      ),
+    },
   ];
 
   
+  const handleUpdateWallet = (id) => {
+    setBookingIdToUpdate(id);
+    setShowCancelForm(true);
+  };
 
+  const handleCancel = () => {
+    setShowCancelForm(false);
+  };
 
-//   useEffect(() => {
-//     const fetchWallet = async () => {
-//       try {
-//         const walletData = await axios.get(`/current/wallets/${userId}`);
-//         setCurrenttWallet(walletData.data);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//     fetchWallet();
-//   }, [userId]);
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (!wallet ) {
-  //   return <p>Loading....</p>;
-  // }
+  const handleSubmitUpdateWallet = async (values) => {
+     //alert(BookingIdToUpdate)
+     //return
+   
+       try {
+      const data=await axios.post(`/refund/wallet/${BookingIdToUpdate}/update`, {
+           amount: values.amount,
+          
+           
+         });
+          console.log(data);
+          if(data.data.success){
+            toast.success("Wallet Updated Successfull!");
+            form.resetFields();
+            setShowCancelForm(false);
+          }else{
+            toast.error("Failed to Update Wallet!");
+          }
+         // alert("Amount Withdraw Successfull!");
+   
+       } catch (error) {
+        toast.error("Failed to Update Wallet!");
+         console.error(error);
+       }
+     };
 
   return (
     <AdminLayout>
     {/* <h1>Wallet Details</h1> */}
+    <Modal
+        visible={showCancelForm}
+        onCancel={handleCancel}
+        footer={null}
+        destroyOnClose
+      >
+        <Form
+        form={form}
+         name="UpdateWallet" onFinish={handleSubmitUpdateWallet} hideRequiredMark>
+        
+          <Form.Item label="Amount" name="amount" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Update Wallet
+            </Button>
+            <Button onClick={handleCancel}>Cancel</Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
     <Table
         dataSource={wallet}
         columns={columns}

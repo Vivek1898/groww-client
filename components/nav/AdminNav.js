@@ -155,6 +155,11 @@ const AdminNav = () => {
             <a className={activeName("/admin/refund")}>Admin Withdrawl Details</a>
           </Link>
         </Menu.Item>
+        <Menu.Item key="21" icon={<TransactionOutlined />}>
+          <Link href="/admin/manual">
+            <a className={activeName("/admin/manual")}>Manual Add</a>
+          </Link>
+        </Menu.Item>
        
         <Menu.Item key="10" icon={<UpSquareOutlined />}>
           <Link href="/admin/update">
