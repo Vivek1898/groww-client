@@ -169,5 +169,5 @@
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: stretch;
 }

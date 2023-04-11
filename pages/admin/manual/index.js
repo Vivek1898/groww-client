@@ -15,6 +15,7 @@ const Manual = () => {
   // context
  
   // hooks
+  const [form] = Form.useForm();
   const router = useRouter();
   // state
   const [loading, setLoading] = useState(false);
@@ -32,9 +33,18 @@ const Manual = () => {
         toast.error(data.error);
         setLoading(false);
       
+      }else if(data.payment_id){
+        toast.success("User Added Successfully");
+        form.resetFields();
+        setLoading(false);
       }
+
+      form.resetFields();
+      // form.resetFields();
+      // toast.success("User Added Successfully");
+      setLoading(false);
     } catch (err) {
-      toast.error("Signup failed. Try again.");
+      toast.error("User Add Failed");
       console.log(err);
       setLoading(false);
     }
@@ -70,7 +80,9 @@ const Manual = () => {
       <Col span={12} offset={6} style={{ paddingTop: "10%" }}>
         <Title>Manual Add User To Plan</Title>
 
-        <Form onFinish={onFinish}>
+        <Form 
+          form={form}
+        onFinish={onFinish}>
           <Form.Item
             name="name"
             rules={[

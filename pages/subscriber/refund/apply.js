@@ -49,7 +49,7 @@ const Apply = () => {
       <WalletDetails userId={userId}  setwalletBalance={setWallet}/>
       <br></br>
       <h3 className="Withdrawl"  style={{ textAlign: 'center' }} > Available Balance : {Wallet}
-      {Wallet<=0 ? (<Tag  style={{ textAlign: 'center' }}color="red">Insufficient Balance</Tag> ):(<Tag  style={{ textAlign: 'center' }}  color="green" >Eligible For Withdrawl</Tag>)}</h3> 
+      {Wallet<500 ? (<><Tag  style={{ textAlign: 'center' }}  color="green" >Minimum Balance required is:  ₹ 500</Tag><Tag  style={{ textAlign: 'center' }}color="red">Insufficient Balance </Tag></> ):(<Tag  style={{ textAlign: 'center' }}  color="green" >Eligible For Withdrawl</Tag>)}</h3> 
 
       <Form
         name="creratePlan"
@@ -60,28 +60,28 @@ const Apply = () => {
         <Form.Item
           label="Your Name"
           name="name"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Email"
           name="email"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Mobile"
           name="mobile"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Amount"
           name="amount"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
@@ -90,28 +90,28 @@ const Apply = () => {
         <Form.Item
           label="Upi"
           name="upi"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Bank Name"
           name="bankName"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Account Number"
           name="accountNumber"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="IFSC Code"
           name="ifscCode"
-          // rules={[{ required: true }]}
+          rules={[{ required: true }]}
         >
           <Input />
         </Form.Item>
@@ -119,7 +119,7 @@ const Apply = () => {
 
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={Wallet<=0}>
+          <Button type="primary" htmlType="submit" disabled={Wallet<500}>
           Withdraw
           </Button>
        
