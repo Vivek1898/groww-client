@@ -3,24 +3,23 @@ import SubscriberLayout from "../../../components/layout/SubsLayout";
 import { Form, Input, Button, Tag } from "antd";
 import axios from "axios";
 import { AuthContext } from "../../../context/auth";
-import { useContext ,useState} from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import WalletDetails from "../../../components/wallet";
 
+const Apply = () => {
+  const [auth, setAuth] = useContext(AuthContext);
+  const userId = auth?.user?._id;
+  const [form] = Form.useForm();
+  const [Wallet, setWallet] = useState(0);
 
-const Apply = () => { 
-    const [auth, setAuth] = useContext(AuthContext);
-    const userId = auth?.user?._id;
-    const[form] = Form.useForm();
-    const [Wallet, setWallet] = useState(0);
-  
   const handleSubmit = async (values) => {
     console.log("hello");
     // alert(values);
     console.table(values);
-    try { 
+    try {
       await axios.post(`/refund/create`, {
-           name: values.name,
+        name: values.name,
         email: values.email,
         mobile: values.mobile,
         amount: values.amount,
@@ -28,28 +27,48 @@ const Apply = () => {
         bankName: values.bankName,
         accountNumber: values.accountNumber,
         ifscCode: values.ifscCode,
-        user:userId
+        user: userId,
       });
       toast.success("Withdraw  Applied  successfully!");
       // alert("Withdraw  Applied  successfully!");
       form.resetFields();
-
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-
-  }
-//   console.log("userId")
-//  console.log(Wallet)
+  };
+  //   console.log("userId")
+  //  console.log(Wallet)
   return (
     <SubscriberLayout>
-      <h1 style={{ textAlign: 'center' }}>Withdraw</h1>
+      <h1 style={{ textAlign: "center" }}>Withdraw</h1>
       <br></br>
 
-      <WalletDetails userId={userId}  setwalletBalance={setWallet}/>
+      <WalletDetails userId={userId} setwalletBalance={setWallet} />
       <br></br>
-      <h3 className="Withdrawl"  style={{ textAlign: 'center' }} > Available Balance : {Wallet}
-      {Wallet<500 ? (<><Tag  style={{ textAlign: 'center' }}  color="green" >Minimum Balance required is:  ₹ 500</Tag><Tag  style={{ textAlign: 'center' }}color="red">Insufficient Balance </Tag></> ):(<Tag  style={{ textAlign: 'center' }}  color="green" >Eligible For Withdrawl</Tag>)}</h3> 
+      <h3 className="Withdrawl" style={{ textAlign: "center" }}>
+        {" "}
+        Available Balance : {Wallet}
+        {Wallet < 500 ? (
+          <>
+            <Tag style={{ textAlign: "center" }} color="green">
+              Minimum Balance required is: ₹ 500
+            </Tag>
+            <Tag style={{ textAlign: "center" }} color="red">
+              Insufficient Balance{" "}
+            </Tag>
+          </>
+        ) : (
+          <>
+            <Tag style={{ textAlign: "center" }} color="green">
+            Eligible For Withdrawl
+          </Tag>
+           <Tag style={{ textAlign: "center" }} color="green">
+           Withdrawl Charges 15% of Amount
+         </Tag>
+          </>
+        
+        )}
+      </h3>
 
       <Form
         name="creratePlan"
@@ -57,41 +76,20 @@ const Apply = () => {
         onFinish={handleSubmit}
         hideRequiredMark
       >
-        <Form.Item
-          label="Your Name"
-          name="name"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="Your Name" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="Email" name="email" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Mobile"
-          name="mobile"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="Mobile" name="mobile" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Amount"
-          name="amount"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="Amount" name="amount" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
 
-    
-        <Form.Item
-          label="Upi"
-          name="upi"
-          rules={[{ required: true }]}
-        >
+        <Form.Item label="Upi" name="upi" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
         <Form.Item
@@ -115,14 +113,11 @@ const Apply = () => {
         >
           <Input />
         </Form.Item>
-     
-
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={Wallet<500}>
-          Withdraw
+          <Button type="primary" htmlType="submit" disabled={Wallet < 500}>
+            Withdraw
           </Button>
-       
         </Form.Item>
       </Form>
       <br></br>
