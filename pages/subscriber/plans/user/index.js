@@ -5,6 +5,7 @@ import { AuthContext } from  "../../../../context/auth";
 import AdminLayout from "../../../../components/layout/AdminLayout";
 import { SearchOutlined } from "@ant-design/icons";
 import SubscriberLayout from "../../../../components/layout/SubsLayout";
+import toast from "react-hot-toast";
 const UpdateWallet = () => {
   const [bookings, setBookings] = useState([]);
   const [auth, setAuth] = useContext(AuthContext);
@@ -273,10 +274,12 @@ const UpdateWallet = () => {
         const { data } = await axios.get(
           `/bookings/user/wallet/plans/${userId}`
         );
-        console.log(data.payments);
+     //   console.log(data.payments);
         setBookings(data.payments);
         setLoading(false);
       } catch (error) {
+        
+        // toast.error("Server Error");
         setLoading(false);
         console.error(error);
       }

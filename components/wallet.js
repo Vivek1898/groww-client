@@ -4,6 +4,7 @@ import axios from 'axios';
 import AdminLayout from '../components/layout/AdminLayout';
 import RenderProgress from './progress/RenderProgress';
 import { Spin } from 'antd';
+import toast from 'react-hot-toast';
 const WalletDetails = ( {userId,walletBalance,setwalletBalance}) => {
   const [wallet, setWallet] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,7 @@ const WalletDetails = ( {userId,walletBalance,setwalletBalance}) => {
         setwalletBalance(response.data.latestBal)
         setLoading(false);
       } catch (err) {
+        // toast.error('Server Error');
         console.error(err);
         setLoading(false);
       }

@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../../../context/auth";
 import AdminLayout from "../../../components/layout/AdminLayout";
 import SubscriberLayout from "../../../components/layout/SubsLayout";
+import toast from "react-hot-toast";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -97,6 +98,8 @@ const Bookings = () => {
         setBookings(data.payments);
         setLoading(false)
       } catch (error) {
+        
+        // toast.error("Server Error");
         console.error(error);
         setLoading(false)
       }

@@ -95,47 +95,10 @@ const Refund = () => {
     
   ];
 
-  const handleCancelBooking = (id) => {
-    setBookingIdToCancel(id);
-    setShowCancelForm(true);
-  };
 
-  const handleCancel = () => {
-    setShowCancelForm(false);
-  };
 
-  const handleSubmitCancelBooking = async (values) => {
- //   alert(BookingIdToCancel)
-  
 
-    try {
-      await axios.post(`/refund/${BookingIdToCancel}/cancel`, {
-        amount: values.amount,
-       
-        
-      });
-      // alert("Amount Withdraw Successfull!");
-      toast.success("Amount Withdraw Successfull!");
-      form.resetFields();
-      setShowCancelForm(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleStatusChange = async (refundId, value) => {
-    try {
-      await axios.put(`/refund/status/${refundId}`, { status: value });
-      toast.success('Refund status updated successfully');
-      // Update the refund status in the local state
-      const updatedRefund = refund.map((item) =>
-        item._id === refundId ? { ...item, status: value } : item
-      );
-      setRefund(updatedRefund);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+ 
   
 
   useEffect(() => {
@@ -148,6 +111,7 @@ const Refund = () => {
         setRefund(data.refund);
       } catch (error) {
         console.error(error);
+        toast.error("Server Error");
       }
     };
 
@@ -156,27 +120,7 @@ const Refund = () => {
 
   return (
     <SubscriberLayout>
-      <Modal
-        visible={showCancelForm}
-        onCancel={handleCancel}
-        footer={null}
-        destroyOnClose
-      >
-        <Form
-        form={form}
-         name="cancelBooking" onFinish={handleSubmitCancelBooking} hideRequiredMark>
-        
-          <Form.Item label="Amount" name="amount" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Withdraw booking
-            </Button>
-            <Button onClick={handleCancel}>Cancel</Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+      
 
       <Table
         dataSource={refund}

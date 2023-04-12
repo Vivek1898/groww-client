@@ -16,7 +16,7 @@ const Apply = () => {
   const handleSubmit = async (values) => {
     console.log("hello");
     // alert(values);
-    console.table(values);
+    //console.table(values);
     try {
       await axios.post(`/refund/create`, {
         name: values.name,
@@ -33,6 +33,7 @@ const Apply = () => {
       // alert("Withdraw  Applied  successfully!");
       form.resetFields();
     } catch (err) {
+      toast.error("Server Error");
       console.log(err);
     }
   };

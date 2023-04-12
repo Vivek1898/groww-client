@@ -30,3 +30,31 @@ const LoadingToRedirect = ({ path = "/" }) => {
 };
 
 export default LoadingToRedirect;
+
+
+// import React, { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { Progress } from "antd";
+
+// const LoadingToRedirect = ({ path = "/" }) => {
+//   const [percent, setPercent] = useState(100);
+//   let router = useRouter();
+
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setPercent((currentPercent) => currentPercent - 33.33);
+//     }, 1000);
+//     // redirect once progress bar is complete
+//     percent <= 0 && router.push(path);
+//     // cleanup
+//     return () => clearInterval(interval);
+//   }, [percent]);
+
+//   return (
+//     <div style={{ display: "flex", justifyContent: "center", height: "100vh" }}>
+//       <Progress type="circle" percent={percent} />
+//     </div>
+//   );
+// };
+
+// export default LoadingToRedirect;

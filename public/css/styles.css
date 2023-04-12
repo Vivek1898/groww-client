@@ -171,3 +171,39 @@
   justify-content: flex-start;
   align-items: stretch;
 }
+
+/* Scrollbar styles for both horizontal and vertical */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #177ddc;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 3px;
+}
+
+/* *::-webkit-scrollbar-track {
+
+} */
+
+*::-webkit-scrollbar-thumb {
+  background-color:  #177ddc;
+  border-radius: 10px;
+  /* border: 3px solid #ffffff; */
+}
+
+
+.ant-tabs-nav-wrap{
+overflow: auto !important;
+
+
+}
+.ant-tabs-nav-list{
+  margin-bottom: 15px;
+}
+
+.ant-tabs-nav-more{
+display: none;
+}
