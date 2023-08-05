@@ -1,4 +1,4 @@
-# groww-backend
+# Groww-Frontend
 https://groww-backend.vercel.app/
 
 # Subscription Based Platform 
